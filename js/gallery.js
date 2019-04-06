@@ -85,11 +85,17 @@ function GalleryImage(imgLocation, imgInfo, imgDate, imgURL) {
   this.imgDescription = imgInfo;
   this.imgDate = imgDate;
   this.imgURL = imgURL;
-  //1. location where photo was taken
-	//2. description of photo
-	//3. the date when the photo was taken
-	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
+
 }
 
-GalleryImage.imgLocation = "Paris";
-console.log(GalleryImage["imgLocation"]);
+//Fetch JSON inside images.json file with an XMLHTTPRequest
+function reqListener(){
+  console.log(this.responseText);
+}
+
+var mReq = new XMLHttpRequest();
+mReq.addEventListener("load", reqListener);
+mReq.open("GET", "images.json");
+mReq.send();
+
+console.log(mRequest);
