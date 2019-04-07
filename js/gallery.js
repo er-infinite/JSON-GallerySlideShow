@@ -43,8 +43,35 @@ function swapPhoto() {
 // Counter for the mImages array
 var mCurrentIndex = 0;
 
-// XMLHttpRequest variable
-var mRequest = new XMLHttpRequest();
+//--- LOADING JSON FILE ---
+
+//Create new XMLHTTPRequest object
+const mRequest = new XMLHttpRequest();
+
+//load XMLHTTPRequest object
+mRequest.onload = function(){
+
+  //check if request is OK
+  if(this.status === 200){
+    //try to parse response object
+    try{
+      //xhr.responseText is parsed to create into a javascript object
+      const resObj = JSON.parse(this.responseText);
+      console.log(resObj);
+    }catch (e){
+      console.warn('Error in the JSON. Could not parse');
+    }
+
+    // console.log(this.responseText)
+  }else{
+    console.warn('Request not successful');
+  }
+
+};
+
+//setup request and get a response
+mRequest.open('GET', 'images.json')
+mRequest.send();
 
 // Array holding GalleryImage objects (see below).
 var mImages = [];
@@ -88,14 +115,7 @@ function GalleryImage(imgLocation, imgInfo, imgDate, imgURL) {
 
 }
 
-//Fetch JSON inside images.json file with an XMLHTTPRequest
-function reqListener(){
-  console.log(this.responseText);
-}
 
-var mReq = new XMLHttpRequest();
-mReq.addEventListener("load", reqListener);
-mReq.open("GET", "images.json");
-mReq.send();
 
-console.log(mRequest);
+
+//Create a JSON object that contains the retrieved JSON3 string (in this case, a list of photo URLsand related metadata).
