@@ -116,10 +116,11 @@ $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
+
+  //rotate more indicator when clicked
   $('.moreIndicator.rot90').on('click', () =>{
   $('.moreIndicator').toggleClass('rot90 rot270');
   console.log('mouse click');
-
   });
 
 
