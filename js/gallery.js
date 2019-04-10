@@ -103,8 +103,6 @@ var mImages = [];
 var mJson;
 
 
-
-
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
 //@param A GalleryImage object. Use this method for an event handler for loading a gallery Image object (optional).
 function makeGalleryImageOnloadCallback(galleryImage) {
@@ -118,6 +116,11 @@ $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
+  $('.moreIndicator.rot90').on('click', () =>{
+  $('.moreIndicator').toggleClass('rot90 rot270');
+  console.log('mouse click');
+
+  });
 
 
 });
@@ -134,19 +137,19 @@ function GalleryImage(imgLocation, imgInfo, imgDate, imgURL) {
   this.description = imgInfo;
   this.date = imgDate;
   this.imgPath = imgURL;
-
 }
 
 function getQueryParams(qs) {
- qs = qs.split("+").join(" ");
- var params = {},
- tokens,
- re = /[?&]?([^=]+)=([^&]*)/g;
- while (tokens = re.exec(qs)) {
- params[decodeURIComponent(tokens[1])]
- = decodeURIComponent(tokens[2]);
+  qs = qs.split("+").join(" ");
+  var params = {},
+   tokens,
+   re = /[?&]?([^=]+)=([^&]*)/g;
+   while (tokens = re.exec(qs)) {
+     params[decodeURIComponent(tokens[1])]
+     = decodeURIComponent(tokens[2]);
+   }
+   return params;
  }
- return params;
-}
+
 var $_GET = getQueryParams(document.location.search);
 console.log($_GET["json"]); // would output "John"
