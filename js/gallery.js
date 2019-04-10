@@ -32,21 +32,34 @@ function animate() {
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
-function swapPhoto() {
-	//Add code here to access the #slideShow element.
-	//Access the img element and replace its source
-	//with a new image from your images array which is loaded
-	//from the JSON string
-	console.log('swap photo');
-}
-
 // Counter for the mImages array
 var mCurrentIndex = 0;
+
+function swapPhoto() {
+
+  //if current index is less than the number of images in the array
+  // do the following
+  if (mCurrentIndex < mImages.length ){
+    //select photo div, change image to corresponding index number
+    $('#photo').attr('src', mImages[mCurrentIndex].imgPath);
+    //log index to keep track
+    console.log(mCurrentIndex);
+    //increase index number
+    mCurrentIndex ++;
+    //else if index reaches end of gallery, restart slide show to first image
+  }else{
+    mCurrentIndex = 0;
+  }
+}
 
 //--- Part 2: XMLHttp Request & Creating JSON object ---
 
 //Store location of JSON file in mURL
-const mURL = "images.json";
+// const mURL = "images.json";
+
+// URL for the JSON to load by default
+// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
+var mUrl = 'images.json';
 
 //Create new XMLHTTPRequest object
 const mRequest = new XMLHttpRequest();
@@ -64,9 +77,8 @@ mRequest.onreadystatechange = function(){
 
       //For each item in mJson, Loop through and push each GalleryImage element into mImages array
       for(var i = 0; i < mJson.images.length; i++){
-
+          //push gallery image properties (location, description, date, path) into mImages array
           mImages.push(new GalleryImage (mJson.images[i].imgLocation, mJson.images[i].description, mJson.images[i].date, mJson.images[i].imgPath));
-
       }
       console.log("MJSON LENGTH: " + mJson.images.length);
       // mImages.push(new GalleryImage mJson);
@@ -78,82 +90,19 @@ mRequest.onreadystatechange = function(){
   }
 };
 
-
 //setup request and get a response
-mRequest.open('GET', mURL, true)
+mRequest.open('GET', mUrl, true)
 mRequest.send();
 
-// //Create new XMLHTTPRequest object
-// const mRequest = new XMLHttpRequest();
-//
-// //load XMLHTTPRequest object
-// mRequest.onload = function(){
-//
-//   //check if request is OK
-//   if(this.status === 200){
-//     //try to parse response object
-//     try{
-//       //xhr.responseText is parsed to create into a javascript object
-//       const resObj = JSON.parse(this.responseText);
-//       console.log(resObj);
-//
-//     }catch (e){
-//       console.warn('Error in the JSON. Could not parse');
-//     }
-//
-//     // console.log(this.responseText)
-//   }else{
-//     console.warn('Request not successful');
-//   }
-// };
-//
-//
-// //setup request and get a response
-// mRequest.open('GET', 'images.json')
-// mRequest.send();
-
-// function loadImages(){
-//   const request = new XMLHttpRequest();
-//
-//   request.open('GET', 'images.json');
-//   request.onload = () => {
-//
-//     try{
-//       const mJson = JSON.parse(request.responseText)
-//       populateRankings(mJson);
-//     }catch (e){
-//       console.warn('Error in the JSON. Could not parse')
-//     }
-//   };
-//
-//   request.send();
-// }
-//
-// function populateRankings(json){
-//   console.log(json);
-// }
-//
-// loadImages();
-//
 
 //--- Iterate through JSON object ---
 // Array holding GalleryImage objects (see below).
 var mImages = [];
 
-
-var img = new Image();
-//log quantity of images in document
-console.log('After: ' + document.images.length);
-
-// img.src = 'url';
-
 // Holds the retrived JSON information
 var mJson;
 
 
-// URL for the JSON to load by default
-// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'insert_url_here_to_image_json';
 
 
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
@@ -187,3 +136,17 @@ function GalleryImage(imgLocation, imgInfo, imgDate, imgURL) {
   this.imgPath = imgURL;
 
 }
+
+function getQueryParams(qs) {
+ qs = qs.split("+").join(" ");
+ var params = {},
+ tokens,
+ re = /[?&]?([^=]+)=([^&]*)/g;
+ while (tokens = re.exec(qs)) {
+ params[decodeURIComponent(tokens[1])]
+ = decodeURIComponent(tokens[2]);
+ }
+ return params;
+}
+var $_GET = getQueryParams(document.location.search);
+console.log($_GET["json"]); // would output "John"
