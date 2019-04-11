@@ -32,12 +32,23 @@ function animate() {
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
-// Counter for the mImages array
+//Counter tracking current index
 var mCurrentIndex = 0;
 
-function swapPhoto() {
+//Photo object is created with the following properties: location, description, date, and source
+function GalleryImage(imgLocation, description, date, imgPath) {
+  this.imgLocation = imgLocation;
+  this.description = description;
+  this.date = date;
+  this.imgPath = imgPath;
+}
 
-  // if index is less than 0 (-1 = last photo), add length of images to get correct index number
+
+//Iterates over all the GalleryImage Objects in the mImages array
+function swapPhoto() {
+  GalleryImage();
+
+  //if index is less than 0 (-1 = last photo), add length of images to get correct index number
   if (mCurrentIndex < 0) {
     mCurrentIndex += mImages.length;
   }
@@ -47,15 +58,21 @@ function swapPhoto() {
   if (mCurrentIndex < mImages.length) {
     //select photo div, change image to corresponding index number
     $('#photo').attr('src', mImages[mCurrentIndex].imgPath);
+    $('.location').text("Location: " + mImages[mCurrentIndex].imgLocation);
+    $('.description').text("Description: " + mImages[mCurrentIndex].description);
+    $('.date').text("Date: " + mImages[mCurrentIndex].date);
+
+    //tracking current index
     console.log(mCurrentIndex);
-    //increase index number
+
+    //go to next slide
     mCurrentIndex++;
+
     //else if index reaches end of gallery, restart slide show to first image
   } else {
     mCurrentIndex = 0;
   }
 }
-
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
@@ -75,6 +92,7 @@ function getQueryParams(qs) {
 
 var $_GET = getQueryParams(document.location.search);
 
+//if .json file is not undefined, replace .json file listed in url
 if ($_GET["json"] != undefined){
   mUrl = $_GET["json"];
 }
@@ -148,16 +166,6 @@ $(document).ready(function() {
   })
 
   $("#prevPhoto").on('click', () => {
-    var lastImage = mImages.length;
-    //
-    // if (mCurrentIndex == 0){
-    //   console.log("iamge " + lastImage);
-    //   mCurrentIndex = lastImage - 1;
-    //   console.log("index: " + lastImage);
-    // }
-
-    // mCurrentIndex = mCurrentIndex - 1;
-
     mCurrentIndex -= 2;
     swapPhoto();
 
@@ -170,11 +178,3 @@ window.addEventListener('load', function() {
   console.log('window loaded');
 
 }, false);
-
-//Photo object is created with the following properties: location, description, date, and source
-function GalleryImage(imgLocation, imgInfo, imgDate, imgURL) {
-  this.imgLocation = imgLocation;
-  this.description = imgInfo;
-  this.date = imgDate;
-  this.imgPath = imgURL;
-}
