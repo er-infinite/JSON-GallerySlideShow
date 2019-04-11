@@ -16,7 +16,7 @@
 animate();
 
 var mLastFrameTime = 0;
-var mWaitTime = 1000; //time in ms
+var mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
 	var currentTime = new Date().getTime();
@@ -42,7 +42,6 @@ function swapPhoto() {
   if (mCurrentIndex < mImages.length ){
     //select photo div, change image to corresponding index number
     $('#photo').attr('src', mImages[mCurrentIndex].imgPath);
-    //log index to keep track
     console.log(mCurrentIndex);
     //increase index number
     mCurrentIndex ++;
@@ -102,7 +101,6 @@ var mImages = [];
 // Holds the retrived JSON information
 var mJson;
 
-
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
 //@param A GalleryImage object. Use this method for an event handler for loading a gallery Image object (optional).
 function makeGalleryImageOnloadCallback(galleryImage) {
@@ -126,16 +124,9 @@ $(document).ready( function() {
   console.log('mouse click');
   });
 
-  // $('img.moreIndicator').on('click', () =>{
-
-  //   if ($("img.moreIndicator").hasClass("rot90"))
-  //
-  //
-  // });
-
-
-
-
+  $("#nextPhoto").on('click', ()=>{
+    swapPhoto();
+  })
 
 });
 
