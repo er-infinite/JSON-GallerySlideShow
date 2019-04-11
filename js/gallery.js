@@ -43,10 +43,8 @@ function GalleryImage(imgLocation, description, date, imgPath) {
   this.imgPath = imgPath;
 }
 
-
 //Iterates over all the GalleryImage Objects in the mImages array
 function swapPhoto() {
-  GalleryImage();
 
   //if index is less than 0 (-1 = last photo), add length of images to get correct index number
   if (mCurrentIndex < 0) {
