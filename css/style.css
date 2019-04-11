@@ -22,13 +22,20 @@ body {
   position: relative;
   width: 100%;
   margin: 0 auto;
+	height: 100%;
+	max-width: 520px;
+	max-height: 375px;
 
 }
 /* Prevent image from going over div box */
-.photoHolder img{
+#photo{
 	object-fit: cover;
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
+	max-width: 520px;
+	max-height: 375px;
+	min-height: 375px;
+
 }
 
 .moreIndicator {
@@ -37,15 +44,8 @@ body {
   position: absolute;
   z-index: 3;
   opacity: .8;
-  /* top: 0px; */
-	/* top: 75%; */
-  /* left: 50%; */
-	/* display:block; */
-	top: 50%;
-	left: 50%
-
-
-
+	top: 80%;
+	left: 46%;
 }
 
 
@@ -94,6 +94,12 @@ Make it animate nicely. You'll need CSS3 for this*/
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
+
+	/* ease transition */
+	-moz-transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 }
 
 /*Add CSS styles to rotate the element 180deg
@@ -114,4 +120,10 @@ Make it animate nicely. You'll need CSS3 for this*/
   -o-transform: rotate(270deg);
   -ms-transform: rotate(270deg);
   transform: rotate(270deg);
+
+	/* ease transition */
+	-moz-transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 }
