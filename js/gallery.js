@@ -74,14 +74,10 @@ function getQueryParams(qs) {
  }
 
 var $_GET = getQueryParams(document.location.search);
-console.log($_GET["json"]); // would output "John"
 
 if ($_GET["json"] != undefined){
-  mUrl = 'images.json'
-}else{
-  $_GET["json"];
+  mUrl = $_GET["json"];
 }
-
 
 //Create new XMLHTTPRequest object
 const mRequest = new XMLHttpRequest();
