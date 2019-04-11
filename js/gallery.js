@@ -37,6 +37,10 @@ var mCurrentIndex = 0;
 
 function swapPhoto() {
 
+  if(mCurrentIndex < 0){
+    mCurrentIndex += mImages.length;
+    // $('#photo').attr('src', mImages[mCurrentIndex].imgPath);
+  }
   //if current index is less than the number of images in the array
   // do the following
   if (mCurrentIndex < mImages.length ){
@@ -49,7 +53,13 @@ function swapPhoto() {
   }else{
     mCurrentIndex = 0;
   }
+
+
+
+
 }
+
+
 
 //--- Part 2: XMLHttp Request & Creating JSON object ---
 
@@ -127,6 +137,24 @@ $(document).ready( function() {
   $("#nextPhoto").on('click', ()=>{
     swapPhoto();
   })
+
+$("#prevPhoto").on('click', ()=> {
+    var lastImage = mImages.length;
+    //
+    // if (mCurrentIndex == 0){
+    //   console.log("iamge " + lastImage);
+    //   mCurrentIndex = lastImage - 1;
+    //   console.log("index: " + lastImage);
+    // }
+
+  // mCurrentIndex = mCurrentIndex - 1;
+
+
+  mCurrentIndex -= 2;
+  swapPhoto();
+
+})
+
 
 });
 
