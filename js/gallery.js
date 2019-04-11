@@ -117,11 +117,24 @@ $(document).ready( function() {
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
 
-  //rotate more indicator when clicked
-  $('.moreIndicator.rot90').on('click', () =>{
+  //rotate moreIndicator and display details when clicked
+  $('.moreIndicator').on('click', () =>{
+    // $('.moreIndicator').addClass("rot270").hasClass("rot90");
+    // $('.moreIndicator').removeClass("rot270").addClass("rot90");
   $('.moreIndicator').toggleClass('rot90 rot270');
+  $("div.details").fadeToggle();
   console.log('mouse click');
   });
+
+  // $('img.moreIndicator').on('click', () =>{
+
+  //   if ($("img.moreIndicator").hasClass("rot90"))
+  //
+  //
+  // });
+
+
+
 
 
 });
